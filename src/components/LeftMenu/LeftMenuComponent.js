@@ -1,16 +1,30 @@
 import React, { useState } from 'react';
 import './LeftMenuComponent.css';
-import sourceData from '../../data/products_data';
+import {useSelector, useDispatch} from 'react-redux';
+import {setDataByCategory} from '../../store/actions';
+// import sourceData from '../../data/products_data';
 
 
 const LeftMenuComponent = () => {
-    let prodData = sourceData.filter(res => res.category !== null);
+    const shoppingData  = useSelector(state => state.data.shoppingData);
+    const dispatch = useDispatch();
+  
+  console.log(shoppingData);
+    let categoryData = shoppingData.filter((res,index,self) => { return res.category !== null && self.findIndex(t => t.category == res.category) === index});
     let rating = [{ id: 1, rating: 1 }, { id: 2, rating: 2 }, { id: 3, rating: 3 }, { id: 4, rating: 4 }, { id: 5, rating: 5 }];
     let price = [{ id: 1, price: "0-100" }, { id: 2, price: "100-200" }, { id: 3, price: "200-300" }, { id: 4, price: "300-400" }, { id: 5, price: "400+" }];
-    const [products, setProducts] = useState(prodData);
+    
+    const [products, setProducts] = useState(categoryData);
     const [ratings, setRatings] = useState(rating);
     const [prices, setPrices] = useState(price);
-    // console.log(products);
+
+    const handleChange = (e) => {
+        if(e.target.name === 'Category') {
+         let shoppingList = shoppingData.filter(item => item.category == e.target.value);
+             dispatch(setDataByCategory(shoppingList));
+        }
+    }
+
 
     return (
         <div className="cards">
@@ -34,7 +48,7 @@ const LeftMenuComponent = () => {
                             {products.map(prod => {
                                 return (
                                     <div key={prod._id} className="filterSection">
-                                        <input type="checkbox" className="checkBoxInput" name={prod.name} />
+                                        <input type="checkbox" className="checkBoxInput" value={prod.category} name="Category" onChange={handleChange}/>
                                         <span className="filterText">{prod.category}</span>
                                         <br />
                                     </div>

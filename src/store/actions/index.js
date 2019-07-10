@@ -1,6 +1,8 @@
-export default getMessage = (message) => {
-  return {
-    type: "GET_MESSAGE",
-    payload: message
-  };
+
+export const setDataByCategory = (shoppingData) => (dispatch) => {
+    dispatch({
+            type: "SET_DATA_BY_CATEGORY",
+            payload: {shoppingData}
+    })
 }
+

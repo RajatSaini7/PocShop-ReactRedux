@@ -1,15 +1,53 @@
 import React from 'react';
 import './ProductComponent.css';
+import { useSelector } from 'react-redux';
 
 
 const ProductComponent = () => {
-
+    const shoppingData = useSelector(state => state.data.shoppingData);
+   
     return (
         <div className="rightContainer">
             <div className="categorySection">
                 <span className="categoryText">Category 1</span>
                 <div className="categoryHolder">
-                    <div className="productHolder">
+                    {shoppingData.map(product => {
+                        return (
+                            <div className="productHolder">
+                            <div className="imgSection">
+                                <div className="imgDiv" />
+                            </div>
+                            <span className="productHeader">{product.name}</span>
+                            <div className="productDesc">
+                                {product.description}
+                </div>
+                            <div className="productRating">
+                                <div className="rating-image">
+                                    <img src="./images/RetinaIcon.svg" alt="rating-icon" />
+                                    <img src="./images/RetinaIcon.svg" alt="cart-icon" />
+                                    <img src="./images/RetinaIcon.svg" alt="cart-icon" />
+                                    <img src="./images/RetinaIcon.svg" alt="cart-icon" />
+                                    <img src="./images/RetinaIcon.svg" alt="cart-icon" />
+                                    <b className="ratingText">({product.ratingInfo.userCount})</b>
+                                </div>
+                            </div>
+                            <h3 className="cost-text">{product.price}</h3>
+                            <div className="cartButtons">
+                                <button className="addbutton">Add to cart</button>
+                                <div className="plus-minus">
+                                    <div className="cart-icons">
+                                        <img src="images/FontAwesome47.svg" />
+                                    </div>
+                                    <input className="cart-text" type="number" defaultValue={1} />
+                                    <div className="cart-icons">
+                                        <img src="images/PixleIcon.svg" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        )
+                    })}
+                    {/* <div className="productHolder">
                         <div className="imgSection">
                             <div className="imgDiv" />
                         </div>
@@ -144,7 +182,7 @@ const ProductComponent = () => {
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div> */}
                 </div>
             </div>
         </div>
