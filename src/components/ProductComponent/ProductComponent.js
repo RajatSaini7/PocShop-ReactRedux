@@ -1,5 +1,5 @@
 import React from 'react';
-import './ProductComponent.css';
+// import './ProductComponent.css';
 import { useSelector } from 'react-redux';
 
 
@@ -13,7 +13,7 @@ const ProductComponent = () => {
                 <div className="categoryHolder">
                     {shoppingData.map(product => {
                         return (
-                            <div className="productHolder">
+                            <div className="productHolder" key={product._id}>
                             <div className="imgSection">
                                 <div className="imgDiv" />
                             </div>

@@ -1,23 +1,35 @@
 import React from 'react';
-import './MainComponent.css';
 import LeftMenuComponent from '../LeftMenu/LeftMenuComponent';
 import ProductComponent from '../ProductComponent/ProductComponent';
+import styled from 'styled-components';
 
+const Container = styled.div`
+    height: calc(100vh - 101px);
+    width: 100%;
+`;
+
+const Section = styled.div`
+   padding: 0 !important;
+`;
+
+const SectionContainer = styled.div`
+  margin:0 !important;
+`;
 
 const MainComponent = () => {
 
     return (
-        <div className="mapper">
-            <div className="row no-row">
-                <div className="col-md-3 no-cover">
+        <Container>
+            <SectionContainer className="row">
+                <Section className="col-md-3">
                     <LeftMenuComponent />
-                </div>
+                </Section>
 
-                <div className="col-md-9 no-cover">
+                <Section className="col-md-9">
                         <ProductComponent />
-                </div>
-            </div>
-        </div>
+                </Section>
+            </SectionContainer>
+        </Container>
     );
 }
 
